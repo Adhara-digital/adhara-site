@@ -1,0 +1,636 @@
+/* ============================================================
+   Adhara — styles des composants
+   ============================================================ */
+
+/* ciel étoilé + constellation du Grand Chien (le plus en arrière) */
+.starfield {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+}
+
+/* voile de vitesse : vignette rouge qui se resserre quand on accélère */
+.warpveil {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(
+    120% 90% at 50% 50%,
+    transparent 38%,
+    rgba(143, 23, 23, 0.28) 78%,
+    rgba(10, 4, 6, 0.62) 100%
+  );
+  transition: opacity 0.25s linear;
+  mix-blend-mode: screen;
+}
+
+/* indicateur de scroll : petit trait rouge sur le côté */
+.scrollrail {
+  position: fixed;
+  top: 0;
+  right: 7px;
+  height: 100vh;
+  width: 2px;
+  z-index: 60;
+  pointer-events: none;
+}
+.scrollrail__thumb {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 64px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, var(--red-dark), var(--red));
+  box-shadow: 0 0 8px rgba(200, 34, 34, 0.6);
+  transition: top 0.08s linear;
+}
+
+/* aura de fond animée — carmin / rouge sang, intensifié */
+.bg-aura {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      720px 460px at 80% -5%,
+      rgba(143, 23, 23, 0.32),
+      transparent 62%
+    ),
+    radial-gradient(
+      560px 560px at 8% 22%,
+      rgba(94, 14, 14, 0.24),
+      transparent 60%
+    ),
+    radial-gradient(
+      820px 560px at 50% 112%,
+      rgba(130, 18, 18, 0.2),
+      transparent 62%
+    ),
+    radial-gradient(
+      1200px 900px at 50% 50%,
+      rgba(46, 6, 6, 0.3),
+      transparent 75%
+    );
+  animation: aura 16s ease-in-out infinite alternate;
+}
+@keyframes aura {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    transform: translateY(-20px) scale(1.05);
+  }
+}
+
+/* assombrit tout le fond spatial uniformément (aucune zone localisée,
+   donc aucune démarcation) pour gagner en clarté et en lisibilité générale */
+.bg-dim {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: rgba(3, 2, 5, 0.42);
+}
+
+/* Emphase par contraste, plus par couleur : la ligne mise en valeur
+   reste en blanc franc pendant que le reste du titre passe en gris
+   clair (voir .hero__title). Le rouge ne porte plus de texte. */
+.grad {
+  color: var(--ink);
+  font-style: normal;
+}
+
+/* ---------- NAV ---------- */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  transition:
+    background 0.4s var(--ease),
+    border-color 0.4s var(--ease),
+    backdrop-filter 0.4s;
+  border-bottom: 1px solid transparent;
+}
+.nav--solid {
+  background: rgba(10, 10, 13, 0.72);
+  backdrop-filter: blur(14px);
+  border-bottom-color: var(--line);
+}
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  height: var(--logo-h, 34px);
+  vertical-align: middle;
+}
+.logo__icon {
+  height: 100%;
+  width: auto;
+  display: block;
+  flex: 0 0 auto;
+}
+.logo__word {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  font-size: calc(var(--logo-h, 34px) * 0.62);
+  line-height: 1;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.nav__links {
+  display: flex;
+  gap: 2rem;
+}
+.nav__links a {
+  font-size: 0.92rem;
+  color: var(--ink-dim);
+  position: relative;
+  transition:
+    color 0.7s var(--ease),
+    text-shadow 0.7s var(--ease);
+}
+/* soulignement dégradé aux bords fondus, qui grandit doucement */
+.nav__links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -7px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--red), transparent);
+  opacity: 0;
+  transform: scaleX(0.35);
+  transition:
+    opacity 0.7s var(--ease),
+    transform 0.7s var(--ease);
+}
+.nav__links a:hover {
+  color: var(--ink);
+  text-shadow: 0 0 14px rgba(200, 34, 34, 0.55);
+}
+.nav__links a:hover::after {
+  opacity: 1;
+  transform: scaleX(1);
+}
+.nav__actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.langtoggle {
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  padding: 0.4rem 0.7rem;
+  color: var(--ink-faint);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  display: inline-flex;
+  gap: 0.3rem;
+  transition: border-color 0.3s;
+}
+.langtoggle:hover {
+  border-color: var(--red);
+}
+.langtoggle .on {
+  color: var(--ink);
+}
+.langtoggle__sep {
+  color: var(--ink-faint);
+}
+
+/* ---------- HERO ---------- */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-top: 72px;
+}
+.hero__inner {
+  padding-top: 4vh;
+  padding-bottom: 8vh;
+}
+.hero__title {
+  color: var(--ink-dim); /* .grad rétablit le blanc sur la ligne accentuée */
+  font-size: clamp(2.6rem, 8vw, 5.6rem);
+  margin: 1.4rem 0;
+  max-width: 16ch;
+}
+.hero__title span {
+  display: inline;
+}
+.hero__lead {
+  font-size: clamp(1.05rem, 1.8vw, 1.3rem);
+  color: var(--ink-dim);
+  max-width: 40ch;
+  font-weight: 300;
+}
+.hero__cta {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2.4rem;
+  flex-wrap: wrap;
+}
+.hero__scroll {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 40px;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  display: flex;
+  justify-content: center;
+}
+.hero__scroll span {
+  width: 3px;
+  height: 8px;
+  border-radius: 3px;
+  background: var(--red);
+  margin-top: 7px;
+  animation: scrolldot 1.8s ease-in-out infinite;
+}
+@keyframes scrolldot {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(10px);
+    opacity: 0.3;
+  }
+}
+
+/* ---------- sections communes ---------- */
+.section--alt {
+  background: linear-gradient(
+    180deg,
+    transparent,
+    var(--bg-2) 12%,
+    var(--bg-2) 88%,
+    transparent
+  );
+}
+.section__note {
+  color: var(--ink-faint);
+  font-size: 0.88rem;
+  margin-top: 0.8rem;
+  font-style: italic;
+}
+
+/* ---------- CARTES ---------- */
+.cards {
+  display: grid;
+  gap: 1.2rem;
+  margin-top: 3rem;
+}
+.cards--3 {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+.card {
+  padding: 2rem 1.8rem;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--surface);
+  transition:
+    transform 0.4s var(--ease),
+    border-color 0.4s var(--ease);
+}
+.card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(200, 34, 34, 0.55);
+}
+.card__icon {
+  color: var(--red);
+  font-size: 1.4rem;
+}
+.card h3 {
+  font-size: 1.35rem;
+  margin: 1rem 0 0.6rem;
+}
+.card p {
+  color: var(--ink-dim);
+  font-size: 0.96rem;
+  font-weight: 300;
+}
+
+/* ---------- APPS ---------- */
+.appcard {
+  padding: 1.6rem;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition:
+    transform 0.4s var(--ease),
+    border-color 0.4s var(--ease);
+}
+.appcard:hover {
+  transform: translateY(-6px);
+  border-color: rgba(200, 34, 34, 0.55);
+}
+.appcard__top {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.appcard__icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: var(--grad);
+  display: grid;
+  place-items: center;
+  font-family: "Space Grotesk";
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: #fff;
+  flex: 0 0 auto;
+}
+.appcard h3 {
+  font-size: 1.15rem;
+}
+.appcard__tag {
+  font-size: 0.76rem;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.appcard p {
+  color: var(--ink-dim);
+  font-size: 0.92rem;
+  font-weight: 300;
+  flex: 1;
+}
+.appcard__meta {
+  display: flex;
+  gap: 1.2rem;
+  font-size: 0.85rem;
+  color: var(--ink);
+  font-weight: 500;
+}
+.appcard__meta span:first-child {
+  color: var(--ink);
+}
+.appcard__store {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink-dim);
+  transition: color 0.3s;
+}
+.appcard__store:hover {
+  color: var(--ink);
+}
+
+/* le titre "Jeunes, rapides, sans compromis." doit tenir sur une seule
+   ligne — la contrainte partagée `max-width: 20ch` le forçait à casser
+   inutilement alors qu'il tient largement dans la largeur de section. */
+#why .section__title {
+  max-width: none;
+}
+
+/* ---------- WHY ---------- */
+.why {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem 3rem;
+  margin-top: 3rem;
+}
+.why__item {
+  display: flex;
+  gap: 1.2rem;
+}
+.why__k {
+  font-family: "Space Grotesk";
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--ink);
+}
+.why__item h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+.why__item p {
+  color: var(--ink-dim);
+  font-weight: 300;
+  font-size: 0.96rem;
+}
+
+/* ---------- STATS ---------- */
+.stats__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+.stat {
+  text-align: center;
+  padding: 1.5rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--surface);
+}
+.stat__value {
+  display: block;
+  font-family: "Space Grotesk";
+  font-weight: 700;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1;
+}
+.stat__label {
+  display: block;
+  margin-top: 0.6rem;
+  color: var(--ink-dim);
+  font-size: 0.9rem;
+}
+
+/* ---------- ABOUT ---------- */
+/* La colonne de droite accueille la constellation 3D (voir
+   AboutConstellation.jsx). Elle avait été supprimée avec l'étoile
+   décorative, elle revient pour un contenu cette fois. */
+.about__inner {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+.about__p {
+  color: var(--ink-dim);
+  font-weight: 300;
+  margin-top: 1.2rem;
+  max-width: 52ch;
+}
+
+/* ---------- CONSTELLATION 3D (À propos) ---------- */
+/* Le rapport hauteur/largeur est imposé par aspect-ratio plutôt que
+   par une hauteur fixe : le canvas suit ainsi la largeur de sa
+   colonne à toutes les tailles d'écran, sans réglage par palier. */
+.constel {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  max-height: 520px;
+}
+.constel__canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  cursor: grab;
+  /* pan-y laisse le défilement vertical de la page au navigateur et
+     ne capte que l'horizontal : au doigt, on fait tourner en glissant
+     latéralement sans jamais bloquer le scroll. À passer sur `none`
+     le jour où l'axe vertical sera activé (AXIS_Y). */
+  touch-action: pan-y;
+}
+.constel__canvas:active {
+  cursor: grabbing;
+}
+
+/* ---------- CONTACT ---------- */
+.contact__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+.contact__lead {
+  color: var(--ink-dim);
+  font-weight: 300;
+  margin-top: 1rem;
+}
+.contact__email {
+  display: inline-block;
+  margin-top: 1.4rem;
+  font-family: "Space Grotesk";
+  font-size: 1.3rem;
+  color: var(--ink);
+  border-bottom: 1px solid transparent;
+}
+/* sélecteur renforcé (a.contact__email) : la classe .reveal, portée par
+   le même lien, définit aussi `transition` et écraserait un simple
+   `.contact__email { transition: ... }` de même spécificité. */
+a.contact__email {
+  transition: border-color 0.4s var(--ease);
+}
+a.contact__email:hover {
+  border-bottom-color: var(--red);
+}
+.contact__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.contact__form input,
+.contact__form textarea {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 0.96rem;
+  resize: vertical;
+  transition: border-color 0.3s;
+}
+.contact__form input:focus,
+.contact__form textarea:focus {
+  outline: none;
+  border-color: var(--red);
+}
+.contact__form input::placeholder,
+.contact__form textarea::placeholder {
+  color: var(--ink-faint);
+}
+.contact__form .btn {
+  align-self: flex-start;
+}
+
+/* ---------- FOOTER ---------- */
+.footer {
+  border-top: 1px solid var(--line);
+  padding: 3rem 0;
+}
+.footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer__brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.footer__tag {
+  color: var(--ink-faint);
+  font-size: 0.85rem;
+}
+.footer__links {
+  display: flex;
+  gap: 1.5rem;
+}
+.footer__links a {
+  color: var(--ink-dim);
+  font-size: 0.9rem;
+  transition: color 0.3s;
+}
+.footer__links a:hover {
+  color: var(--ink);
+}
+.footer__copy {
+  color: var(--ink-faint);
+  font-size: 0.82rem;
+  width: 100%;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 860px) {
+  .nav__links {
+    display: none;
+  }
+  .about__inner,
+  .contact__inner {
+    grid-template-columns: 1fr;
+  }
+  /* Sur mobile la constellation passe sous le texte et se réduit :
+     elle reste active, comme demandé, mais ne mange pas l'écran.
+     Si vous décidez de la retirer du mobile, une seule règle suffit
+     ici — display: none — sans toucher au composant. */
+  .constel {
+    max-height: 340px;
+    margin-top: 2rem;
+  }
+}
+@media (max-width: 560px) {
+  .nav__cta {
+    display: none;
+  }
+  .hero__cta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .hero__cta .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

@@ -1,0 +1,187 @@
+/* ============================================================
+   Adhara — moderne & audacieux · sombre + rouge
+   Palette provisoire : à caler sur le logo une fois reçu.
+   ============================================================ */
+:root {
+  --bg: #0a0a0d;
+  --bg-2: #0e0e13;
+  --surface: #15151c;
+  --surface-2: #1c1c25;
+  --line: rgba(255, 255, 255, 0.08);
+
+  --ink: #f4f4f7;
+  --ink-dim: #a2a2b4;
+  --ink-faint: #64647a;
+
+  /* ── Rouge Adhara — nuance unique (5 août 2026) ───────────────────
+     Luminosité 46 %, à mi-chemin entre le rouge sang d'origine
+     (33 %, illisible) et le rouge du logo (55 %, qui tirait vers le
+     saumon). Vert et bleu strictement égaux : rouge pur.
+
+     RÈGLE D'USAGE — ce rouge ne porte jamais de texte sur fond
+     sombre : il n'y donne que 3,49:1, sous le seuil de 4,5:1. Il est
+     réservé aux aplats, traits, bordures, icônes et halos, où le
+     seuil applicable est de 3:1 (éléments d'interface). Tout texte
+     autrefois rouge est passé en --ink.
+     Seule exception : du blanc POSÉ SUR ce rouge, qui donne 5,66:1. */
+  --red: #c82222; /* rouge Adhara : aplats, traits, icônes */
+  --red-dark: #a81e1e; /* extrémité sombre des dégradés */
+  --red-deep: #5e0e0e; /* profondeur : ombres et auras de fond */
+  --grad: linear-gradient(100deg, var(--red-dark), var(--red));
+
+  --max: 1160px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+body {
+  font-family: "Inter", system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+h1,
+h2,
+h3 {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+.wrap {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+.section {
+  padding: clamp(4rem, 10vw, 8rem) 0;
+  position: relative;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-dim); /* le rouge ne porte plus de texte ; le trait ::before le porte */
+}
+.eyebrow::before {
+  content: "";
+  width: 26px;
+  height: 2px;
+  background: var(--grad);
+}
+
+.section__title {
+  font-size: clamp(1.9rem, 4.4vw, 3.2rem);
+  margin: 1.1rem 0 0;
+  max-width: 20ch;
+  white-space: pre-line; /* respecte les sauts de ligne \n insérés dans le contenu (i18n.jsx) */
+}
+
+/* boutons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.85rem 1.5rem;
+  border-radius: 100px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: 1px solid transparent;
+  transition:
+    transform 0.35s var(--ease),
+    box-shadow 0.35s var(--ease),
+    background 0.35s var(--ease);
+}
+.btn--primary {
+  background: var(--grad);
+  color: #fff;
+  box-shadow: 0 8px 30px rgba(94, 14, 14, 0.5);
+}
+.btn--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(200, 34, 34, 0.5);
+}
+.btn--ghost {
+  border-color: var(--line);
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.02);
+}
+.btn--ghost:hover {
+  border-color: var(--red);
+  transform: translateY(-2px);
+}
+
+/* fondu au scroll : se fond dans le décor en disparaissant (flou + fondu),
+   en émerge à nouveau en réapparaissant. Sortie immédiate (pas de délai,
+   réactif) ; entrée avec le délai de décalage `--d` (arrivée en cascade). */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  filter: blur(10px);
+  transition:
+    opacity 0.6s var(--ease),
+    transform 0.6s var(--ease),
+    filter 0.6s var(--ease);
+}
+.reveal.in {
+  opacity: 1;
+  transform: none;
+  filter: blur(0);
+  transition:
+    opacity 0.9s var(--ease),
+    transform 0.9s var(--ease),
+    filter 0.9s var(--ease);
+  transition-delay: var(--d, 0s);
+}
+
+/* halo décoratif */
+.glowdot {
+  color: var(--red);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+  * {
+    animation: none !important;
+  }
+}
