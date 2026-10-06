@@ -6,7 +6,6 @@ import WelcomeBanner from "./components/WelcomeBanner.jsx";
 import ServicesSection from "./components/ServicesSection.jsx";
 import AppsSection from "./components/AppsSection.jsx";
 import WhyChooseUsSection from "./components/WhyChooseUsSection.jsx";
-import KeyNumbersSection from "./components/KeyNumbersSection.jsx";
 import AboutUsSection from "./components/AboutUsSection.jsx";
 import ContactFormSection from "./components/ContactFormSection.jsx";
 import FooterBar from "./components/FooterBar.jsx";
@@ -26,7 +25,6 @@ export default function Website() {
         <ServicesSection />
         <AppsSection />
         <WhyChooseUsSection />
-        <KeyNumbersSection />
         <AboutUsSection />
         <ContactFormSection />
       </main>

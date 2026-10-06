@@ -25,15 +25,13 @@ export const CONTENT = {
       ]
     },
     apps: {
-      label: "Nos applications",
-      title: "Déjà entre les mains\ndu monde entier.",
-      note: "Aperçus provisoires — vos vraies applications du Play Store viendront ici.",
+      label: "Notre produit",
+      title: "Le premier d'une série.",
+      note: "",
       cards: [
-        { name: "Proserpine", tag: "Écologie · Scan", desc: "Triez vos déchets en un scan.", rating: "4.8", installs: "500 k+" },
-        { name: "Workflow Studio", tag: "Automatisation", desc: "Automatisez vos solutions professionnelles.", rating: "4.7", installs: "1 M+" },
-        { name: "SportLife", tag: "Sport & bien-être", desc: "Dépensez-vous en vous amusant.", rating: "4.9", installs: "250 k+" }
+        { name: "Proserpine", tag: "Écologie · Scan", desc: "Triez vos déchets en un scan. Première application du studio, actuellement en développement.", status: "En développement" }
       ],
-      store: "Voir sur le Play Store"
+      store: "En savoir plus"
     },
     why: {
       label: "Pourquoi Adhara",
@@ -44,15 +42,10 @@ export const CONTENT = {
         { k: "03", name: "Qualité produit", desc: "Du code propre, des interfaces soignées, des mises à jour régulières. La qualité n'est pas une option." }
       ]
     },
-    stats: {
-      label: "En chiffres",
-      items: [
-        { value: "1,7 M+", label: "Téléchargements" },
-        { value: "4.8", label: "Note moyenne" },
-        { value: "40+", label: "Pays touchés" },
-        { value: "3", label: "Apps publiées" }
-      ]
-    },
+    /* Section « En chiffres » retirée le 6 octobre 2026 : les valeurs
+       affichées (1,7 M+ téléchargements, 4.8 de note, 40+ pays, 3 apps
+       publiées) étaient inventées. Elles reviendront quand il y aura
+       des chiffres réels à montrer. */
     about: {
       label: "À propos",
       title: "Une étoile montante\ndu logiciel.",
@@ -93,15 +86,13 @@ export const CONTENT = {
       ]
     },
     apps: {
-      label: "Our apps",
-      title: "Already in hands worldwide.",
-      note: "Placeholder previews — your real Play Store apps will live here.",
+      label: "Our product",
+      title: "The first of a series.",
+      note: "",
       cards: [
-        { name: "Proserpine", tag: "Ecology · Scan", desc: "Sort your waste in a single scan.", rating: "4.8", installs: "500k+" },
-        { name: "Workflow Studio", tag: "Automation", desc: "Automate your business solutions.", rating: "4.7", installs: "1M+" },
-        { name: "SportLife", tag: "Fitness & wellness", desc: "Get moving while having fun.", rating: "4.9", installs: "250k+" }
+        { name: "Proserpine", tag: "Ecology · Scan", desc: "Sort your waste in a single scan. The studio's first application, currently in development.", status: "In development" }
       ],
-      store: "View on Play Store"
+      store: "Learn more"
     },
     why: {
       label: "Why Adhara",
@@ -112,15 +103,7 @@ export const CONTENT = {
         { k: "03", name: "Product quality", desc: "Clean code, polished interfaces, regular updates. Quality is never optional." }
       ]
     },
-    stats: {
-      label: "By the numbers",
-      items: [
-        { value: "1.7M+", label: "Downloads" },
-        { value: "4.8", label: "Avg. rating" },
-        { value: "40+", label: "Countries reached" },
-        { value: "3", label: "Apps shipped" }
-      ]
-    },
+    /* Section « By the numbers » retirée — voir la note côté FR. */
     about: {
       label: "About",
       title: "A rising star in software.",

@@ -10,7 +10,9 @@ export default function AppsSection() {
           <h2 className="section__title reveal">{t.apps.title}</h2>
           <p className="section__note reveal">{t.apps.note}</p>
         </div>
-        <div className="cards cards--3 apps">
+        {/* `apps--solo` borne la largeur quand il n'y a qu'un produit :
+            sans cela la carte unique s'étirerait sur toute la section. */}
+        <div className={`cards cards--3 apps${t.apps.cards.length === 1 ? " apps--solo" : ""}`}>
           {t.apps.cards.map((a, i) => (
             <article className="appcard reveal" style={{ "--d": `${i * 0.08}s` }} key={i}>
               <div className="appcard__top">
@@ -21,9 +23,11 @@ export default function AppsSection() {
                 </div>
               </div>
               <p>{a.desc}</p>
+              {/* Les notes et volumes d'installation ont été retirés :
+                  ils étaient inventés. Remplacés par l'état réel du
+                  produit, qui lui est vérifiable. */}
               <div className="appcard__meta">
-                <span>★ {a.rating}</span>
-                <span>{a.installs}</span>
+                <span>{a.status}</span>
               </div>
               <a href="#contact" className="appcard__store">{t.apps.store} →</a>
             </article>
