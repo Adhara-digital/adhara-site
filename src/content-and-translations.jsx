@@ -62,6 +62,11 @@ export const CONTENT = {
       title: "Un projet ? Parlons‑en.",
       lead: "Écrivez-nous, on répond vite. C'est notre truc.",
       fields: { name: "Votre nom", email: "Votre e-mail", message: "Votre message", send: "Envoyer" },
+      status: {
+        sending: "Envoi…",
+        success: "Merci, votre message est bien parti. Nous revenons vers vous très vite.",
+        error: "L'envoi a échoué. Votre message est conservé ci-dessus — vous pouvez réessayer, ou nous écrire directement à"
+      },
       email: "adhara.information@gmail.com"
     },
     footer: { rights: "Tous droits réservés.", tagline: "Studio de création logicielle." }
@@ -117,6 +122,11 @@ export const CONTENT = {
       title: "Got a project? Let's talk.",
       lead: "Drop us a line, we reply fast. It's kind of our thing.",
       fields: { name: "Your name", email: "Your email", message: "Your message", send: "Send" },
+      status: {
+        sending: "Sending…",
+        success: "Thank you, your message has been sent. We'll get back to you very soon.",
+        error: "Sending failed. Your message is kept above — you can try again, or write to us directly at"
+      },
       email: "adhara.information@gmail.com"
     },
     footer: { rights: "All rights reserved.", tagline: "Software creation studio." }
